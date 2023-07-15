@@ -16,9 +16,21 @@ class ListingFactory extends Factory
      */
     public function definition(): array
     {
+        $tags = [
+            'laravel' => 'Laravel',
+            'api' => 'API',
+            'backend' => 'Backend',
+            'vue' => 'Vue',
+            'engineer' => 'Engineer',
+        ];
+        $randNum = rand(1, count($tags));
+        $randArray = array_rand($tags, $randNum);
+        if ($randNum === 1) {
+            $randArray = [$randArray];
+        }
         return [
             'title' => $this->faker->sentence(),
-            'tags' => 'laravel, api, backend',
+            'tags' => implode(',', $randArray),
             'company' => $this->faker->company(),
             'email' => $this->faker->companyEmail(),
             'website' => $this->faker->url(),
