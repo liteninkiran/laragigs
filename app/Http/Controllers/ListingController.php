@@ -41,9 +41,9 @@ class ListingController extends Controller
             'description' => 'required',
         ]);
 
-        // if($request->hasFile('logo')) {
-        //     $formFields['logo'] = $request->file('logo')->store('logos', 'public');
-        // }
+        if($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+        }
 
         // $formFields['user_id'] = auth()->id();
 
