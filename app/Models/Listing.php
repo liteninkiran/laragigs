@@ -9,6 +9,22 @@ class Listing extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'logo',
+        'tags',
+        'company',
+        'location',
+        'email',
+        'website',
+        'description',
+    ];
+
     public function scopeFilter($query, array $filters) {
         if($filters['tag'] ?? false) {
             $query->where('tags', 'like', '%' . $filters['tag'] . '%');
