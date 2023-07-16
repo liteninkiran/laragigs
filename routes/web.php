@@ -20,11 +20,17 @@ Route::get('/', function () {
 });
 Route::resource('/listings', ListingController::class);
 
-// Show user register form
+// Show user registration form
 Route::get('/register', [UserController::class, 'create']);
 
 // Create new user
 Route::post('/users', [UserController::class, 'store']);
 
-// Log User Out
+// Logout user
 Route::post('/logout', [UserController::class, 'logout']);
+
+// Show login form
+Route::get('/login', [UserController::class, 'login']);
+
+// Login user
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);
