@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -29,6 +30,7 @@ class ListingFactory extends Factory
             $randArray = [$randArray];
         }
         return [
+            'user_id' => User::inRandomOrder()->first()->id,
             'title' => $this->faker->sentence(),
             'tags' => implode(',', $randArray),
             'company' => $this->faker->company(),
