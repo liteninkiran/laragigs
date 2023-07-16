@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
+    {{-- Head --}}
     <head>
+
+        {{-- Meta --}}
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {{-- Links --}}
         <link rel="icon" href="images/favicon.ico" />
         <link
             rel="stylesheet"
@@ -12,6 +18,8 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
+
+        {{-- Scripts --}}
         <script src="//unpkg.com/alpinejs" defer></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
@@ -25,36 +33,82 @@
                 },
             };
         </script>
-        <title>LaraGigs | Find Laravel Jobs & Projects</title>
+
+        {{-- Title --}}
+        <title>
+            LaraGigs | Find Laravel Jobs & Projects
+        </title>
+
     </head>
+
+    {{-- Body --}}
     <body class="mb-48">
+
+        {{-- Navbar --}}
         <nav class="flex justify-between items-center mb-4">
+
+            {{-- LHS --}}
             <a href="/listings">
                 <img class="w-24" src={{ asset('images/logo.png') }} alt="" class="logo" />
             </a>
+
+            {{-- RHS --}}
             <ul class="flex space-x-6 mr-6 text-lg">
-                <li>
-                    <a href="/register" class="hover:text-laravel">
-                        <i class="fa-solid fa-user-plus"></i> Register
-                    </a>
-                </li>
-                <li>
-                    <a href="/login" class="hover:text-laravel">
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
-                    </a>
-                </li>
+
+                {{-- Logged In --}}
+                @auth
+
+                    {{-- Welcome --}}
+                    <li>
+                        <span class="font-bold uppercase">
+                            Welcome {{auth()->user()->name}}
+                        </span>
+                    </li>
+
+                    {{-- Manage Listings --}}
+                    <li>
+                        <a href="/listings/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Listings</a>
+                    </li>
+
+                {{-- Not Loggend In --}}
+                @else
+
+                    {{-- Register --}}
+                    <li>
+                        <a href="/register" class="hover:text-laravel">
+                            <i class="fa-solid fa-user-plus"></i> Register
+                        </a>
+                    </li>
+
+                    {{-- Login --}}
+                    <li>
+                        <a href="/login" class="hover:text-laravel">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+                        </a>
+                    </li>
+
+                @endauth
+
             </ul>
+
         </nav>
+
+        {{-- Main Content --}}
         <main>
             {{ $slot }}
         </main>
 
+        {{-- Footer --}}
         <footer class="fixed bottom-0 left-0 w-full flex items-center justify-start font-bold bg-laravel text-white h-24 mt-24 opacity-90 md:justify-center">
             <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
             <a href="/listings/create" class="absolute top-1/3 right-10 bg-black text-white py-2 px-5">
                 Post Job
             </a>
         </footer>
+
+        {{-- Flash Messages --}}
         <x-flash-message />
+
     </body>
+
 </html>
