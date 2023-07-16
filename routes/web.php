@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('/listings');
 });
+
+// Listings
+Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
 Route::resource('/listings', ListingController::class);
 
 // Show user registration form
